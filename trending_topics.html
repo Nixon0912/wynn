@@ -214,7 +214,7 @@
                  reportButtonContainer.innerHTML = ''; // Clear placeholder/previous button
                  const reportBtn = document.createElement('a');
                  reportBtn.href = `report.php?topic=${encodeURIComponent(topic)}`; // Link to report.php with the current topic
-                 reportBtn.textContent = `View Report Summary for "${decodedTopic}"`;
+                 reportBtn.textContent = `View And Download Report Summary for "${decodedTopic}"`;
                  reportBtn.classList.add('report-btn');
                  reportBtn.target = "_blank"; // Open report in a new tab
                  reportButtonContainer.appendChild(reportBtn); // Add button to the page

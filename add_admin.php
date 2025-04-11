@@ -61,15 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error_message = "Database connection failed. Please try again later.";
         } else {
             // --- Check for Duplicate Username ---
-            $check_sql = "SELECT Admin_ID FROM admin_file WHERE Admin_Login_Name = ?";
+            $check_sql = "SELECT Admin_ID FROM admin_file WHERE Admin_Login_Name = ? OR Email = ?";
             $check_stmt = $conn->prepare($check_sql);
             if ($check_stmt) {
-                $check_stmt->bind_param("s", $username);
+                $check_stmt->bind_param("ss", $username, $email);
                 $check_stmt->execute();
                 $check_stmt->store_result();
-
+            
                 if ($check_stmt->num_rows > 0) {
-                    $error_message = "Admin username already exists. Please choose another.";
+                    $error_message = "An admin with this username or email already exists. Please use a different one.";        
                 } else {
                      // --- Check if Referral Admin ID exists (Now always checked as it's mandatory) ---
                      $referrer_exists = false; // Assume false until proven true
